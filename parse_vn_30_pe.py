@@ -41,9 +41,14 @@ with Chrome(executable_path=driver_path, chrome_options=options) as driver:
     soup = BeautifulSoup(page_source, 'html.parser')
     title =  soup.select_one('h1.title.style-scope.ytd-video-primary-info-renderer yt-formatted-string')
     comments = soup.select('div.style-scope.ytd-comment-renderer#body')
-    table = table_container.find_element(by=By.CSS_SELECTOR, value='table')
-    tables = pd.read_html(str(table.page_source))
+    page_source = driver.page_source
+
+    #parse rendered page_source with BeautifulSoup
+    soup = BeautifulSoup(page_source, 'html.parser')
+    table_html =soup.select_one('table.table.table-striped.table-bordered.table-hover.table-middle.pos-relative.m-b')
+    tables = pd.read_html(str(table_html))
     table = tables[0]
+    #find link for each stock code
+    links = soup.select()
     print('table: ')
     print(table)
-    page_source = driver.page_source
