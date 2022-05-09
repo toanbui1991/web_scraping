@@ -33,4 +33,5 @@ tables = soup.select_one('table#banggia-khop-lenh')
 tables = pd.read_html(str(tables)) #have to use with table tag
 table_data = tables[0]
 table_data.columns = columns
-print(table_data)
+output_data = table_data[['Mã CK']]
+output_data.to_csv('./data/vn_30_list.csv')
