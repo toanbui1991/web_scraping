@@ -36,8 +36,13 @@ with Chrome(executable_path=driver_path, chrome_options=options) as driver:
     driver.get(target_link)
     table_container = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'div#az-container')))
     time.sleep(5)
-    table = table_container.find_element_by_css_selector('table')
-    tables = pd.read_html(str(table))
+    page_source = driver.page_source
+    #parse rendered page_source with BeautifulSoup
+    soup = BeautifulSoup(page_source, 'html.parser')
+    title =  soup.select_one('h1.title.style-scope.ytd-video-primary-info-renderer yt-formatted-string')
+    comments = soup.select('div.style-scope.ytd-comment-renderer#body')
+    table = table_container.find_element(by=By.CSS_SELECTOR, value='table')
+    tables = pd.read_html(str(table.page_source))
     table = tables[0]
     print('table: ')
     print(table)
