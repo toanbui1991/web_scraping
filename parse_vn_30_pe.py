@@ -1,4 +1,4 @@
-import time
+import time, sys
 import pandas as pd
 import numpy as np
 from selenium.webdriver import Chrome, ChromeOptions
@@ -84,6 +84,9 @@ with Chrome(executable_path=driver_path, chrome_options=options) as driver:
             print('the length of links: {}'.format(len(links)))
             table['link'] = links
             table.to_csv('./data/stocks_page_{}.csv'.format(page_number))
+            if page_number == 161:
+                print('parsing completed!')
+                sys.exit(0)
 
 
         except Exception as e:

@@ -27,11 +27,11 @@ soup = BeautifulSoup(page_source, 'html.parser')
 columns = ['Mã CK', 'TC', 'Trần', 'Sàn', 'Tông KL', 'Bên mua_Giá 3', 'Bên mua_KL3', 'Bên mua_Giá 2', 'Bên mua_KL2',
 'Bên mua_Giá 1', 'Bên mua_KL1', 'Khớp lệnh_Giá', 'Khớp lệnh_KL', 'Khớp lệnh_+/-', 'Bên bán_Giá 3', 'Bên bán_KL3', 'Bên bán_Giá 2', 'Bên bán_KL2',
 'Bên bán_Giá 1', 'Bên bán_KL1', 'Giá_Cao', 'Giá_TB', 'Giá_Thấp', 'Dư_Mua', 'Dư_Bán', 'ĐTNN_Mua', 'ĐTNN_Bán']
-#get table content
-print('length of columns: {}'.format(len(columns)))
 tables = soup.select_one('table#banggia-khop-lenh')
 tables = pd.read_html(str(tables)) #have to use with table tag
 table_data = tables[0]
 table_data.columns = columns
 output_data = table_data[['Mã CK']]
+#clean output_data
+output_data['Mã CK'] = output_data['Mã CK'].apply(lambda x: x[:3])
 output_data.to_csv('./data/vn_30_list.csv')
