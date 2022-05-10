@@ -32,6 +32,6 @@ tables = pd.read_html(str(tables)) #have to use with table tag
 table_data = tables[0]
 table_data.columns = columns
 output_data = table_data[['Mã CK']]
-#clean output_data
+#clean output_data, remove special char
 output_data['Mã CK'] = output_data['Mã CK'].apply(lambda x: x[:3])
 output_data.to_csv('./data/vn_30_list.csv')
