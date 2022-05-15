@@ -1,5 +1,15 @@
+<<<<<<< HEAD
 .env
 /venv
 config.py
 /data/*
 !/data/.gitkeep
+=======
+venv/
+config.py
+.env
+#exclue all files in data
+data/*
+#except .gitkeep to keep folder structure
+!data/.gitkeep
+>>>>>>> 46168ed2ae1ab86d70ad21212939ce5b35a533ab
