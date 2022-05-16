@@ -8,6 +8,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 
+#this script will take vn_30_with_links.csv to parse for analytic information of vn 30 stocks
+#and then write to file vn_30_key_index.csv
 #setting
 driver_path = './chromedriver.exe'
 target_link = 'https://finance.vietstock.vn/BID-ngan-hang-tmcp-dau-tu-va-phat-trien-viet-nam.htm'

@@ -7,6 +7,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
+
+# this script will get data from stocks_dict.csv and return vn_30_with_links
+# vn_30_with_links is the reference to analytic pages of vn_30 stocks
 vn_30_path = './data/vn_30_list.csv'
 vn_30_data = pd.read_csv(vn_30_path)
 vn_30_data.drop(columns=["Unnamed: 0"], inplace=True)
@@ -21,7 +24,7 @@ vn_30_data.to_csv('./data/vn_30_with_links.csv', index=False)
 #setting for parsing vn30
 driver_path = './chromedriver.exe'
 options = ChromeOptions()
-options.add_argument("--lang=ko-KR")
+options.add_argument("--lang=vi-VN")
 stocks = list(vn_30_data["Mã CK"])
 links = list(vn_30_data["Link"])
 with Chrome(executable_path=driver_path, chrome_options=options) as driver:
