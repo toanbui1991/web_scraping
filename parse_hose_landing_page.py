@@ -14,9 +14,10 @@ target_link = 'https://finance.vietstock.vn/BID-ngan-hang-tmcp-dau-tu-va-phat-tr
 options = ChromeOptions()
 options.add_argument("--lang=vi-vn")
 
-vn_30_data = pd.read_csv('./data/vn_30_with_links.csv')
-stocks = list(vn_30_data["Mã CK"])
-links = list(vn_30_data["Link"])
+data = pd.read_csv('./data/stocks_dict.csv')
+hose_data = data[data["Sàn"] == 'HOSE']
+stocks = list(hose_data["Mã CK"])
+links = list(hose_data["Link"])
 columns = ["NN mua", "% NN sở hữu", "Cổ tức TM", "T/S cổ tức", "Beta", "EPS", "P/E", "F P/E", "BVPS", "P/B", 'stock']
 data = []
 with Chrome(executable_path=driver_path, chrome_options=options) as driver:
@@ -41,7 +42,6 @@ with Chrome(executable_path=driver_path, chrome_options=options) as driver:
         print('values: {}'.format(values))
         data.append(values)
     data = pd.DataFrame(data, columns=columns)
-    data = data.sort_values(by=['P/E'])
-    data.to_csv('./data/vn_30_key_index.csv')
+    data.to_csv('./data/hose_data_key_index.csv', index=False)
 
         
